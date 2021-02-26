@@ -1,0 +1,25 @@
+.task-card {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  background-color: white;
+  padding: 0.75rem;
+  border-radius: 4px;
+  box-shadow: rgb(0 0 0 / 20%) 0px 1px 3px;
+}
+.task-name {
+  /* background-color: brown; */
+  justify-self: start;
+  margin-left: 0.5rem;
+  font-weight: 500;
+  width: fit-content;
+}
+.color-box {
+  height: 20px;
+  width: 20px;
+  border: 1px solid rgb(106, 106, 106);
+}
+
+.delete-button-container {
+  margin-left: auto;
+}

@@ -1,0 +1,44 @@
+html,
+body {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  color: #333;
+  background: #fdfdfd;
+}
+.blocks {
+  display: flex;
+  max-width: 500px;
+}
+.cube {
+  display: inline-block;
+  border-radius: 5px;
+  width: 30px;
+  height: 30px;
+  margin: 2.5px;
+  background: #eee;
+  --color: rgb(121, 119, 119);
+}
+
+.elements {
+  margin-top: 40px;
+  border: 2px solid #eee;
+}
+
+.selecto-area {
+  padding: 10px;
+}
+
+#selecto1 .cube {
+  transition: all ease 0.2s;
+}
+
+.moveable #selecto1 .cube {
+  transition: none;
+}
+
+.selecto-area .selected {
+  color: #fff;
+  background: var(--color);
+}
