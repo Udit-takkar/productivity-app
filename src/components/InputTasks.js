@@ -6,9 +6,10 @@ import NativeSelect from "@material-ui/core/NativeSelect";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
 import allActions from "../actions/index";
 
 export default function InputTasks() {
@@ -17,6 +18,19 @@ export default function InputTasks() {
     color: "",
     id: "",
   });
+
+  useEffect(() => {
+    const source = axios.CancelToken.source();
+    const selectColors = axios
+      .get("../colors.json") //  Correct this API call
+      .then((resp) => {
+        console.log(resp.data);
+      })
+      .catch((err) => console.log(err));
+    return () => {
+      source.cancel();
+    };
+  }, []);
 
   const handleChange = (e) => {
     setTasks({ ...Tasks, [e.target.name]: e.target.value });
@@ -27,7 +41,7 @@ export default function InputTasks() {
     return state.addTask.tasks;
   });
 
-  console.log(task);
+  // console.log(task);
   // console.log(Tasks);
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
