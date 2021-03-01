@@ -9,9 +9,11 @@ import TaskCard from "./components/TaskCard";
 function App() {
   return (
     <div className="App">
-      <Grid container spacing={0}>
+      <Grid container style={{ marginTop: "1rem" }} spacing={2}>
         <Grid
-          xs={6}
+          md={6}
+          sm={6}
+          xs={12}
           item
           alignItems="center"
           justify="center"
@@ -22,11 +24,19 @@ function App() {
         >
           <Blocks />
         </Grid>
-        <Grid xs={6} item container>
-          <Grid xs={12} item>
+        <Grid
+          xs={12}
+          sm={4}
+          md={4}
+          item
+          container
+          direction="column"
+          spacing={3}
+        >
+          <Grid item>
             <InputTasks />
           </Grid>
-          <Grid xs={12} item>
+          <Grid item>
             <TaskCard />
           </Grid>
         </Grid>

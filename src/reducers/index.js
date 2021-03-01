@@ -1,12 +1,10 @@
 import { Select } from "@material-ui/core";
 import React from "react";
 import { combineReducers } from "redux";
-import addTaskReducer from "./AddTask";
-import DeleteTaskReducer from "./DeleteTaskReducer";
+import TaskReducer from "./AddTask";
 
 const reducers = combineReducers({
-  addTask: addTaskReducer,
-  deleteTask: DeleteTaskReducer,
+  addTask: TaskReducer,
 });
 
 export default reducers;

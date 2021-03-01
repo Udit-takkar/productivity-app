@@ -6,6 +6,7 @@
   padding: 0.75rem;
   border-radius: 4px;
   box-shadow: rgb(0 0 0 / 20%) 0px 1px 3px;
+  margin-top: 0.75rem;
 }
 .task-name {
   /* background-color: brown; */

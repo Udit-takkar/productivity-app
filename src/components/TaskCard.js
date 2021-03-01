@@ -6,7 +6,6 @@ import allActions from "../actions/index";
 
 export default function TaskCard() {
   const tasks = useSelector((state) => {
-    console.log(state.addTask.tasks);
     return state.addTask.tasks;
   });
 

@@ -1,9 +1,10 @@
 import React from "react";
 
 const intialState = { tasks: [] };
-export default function addTaskReducer(state = intialState, action) {
+export default function TaskReducer(state = intialState, action) {
   switch (action.type) {
     case "ADD_TASK": {
+      console.log(state);
       return {
         tasks: [
           ...state.tasks,
@@ -14,6 +15,14 @@ export default function addTaskReducer(state = intialState, action) {
           },
         ],
       };
+    }
+
+    case "DELETE_TASK": {
+      const newTasks = state.tasks.filter((task) => {
+        return task.id !== action.payload.id;
+      });
+
+      return { tasks: newTasks };
     }
 
     default: {

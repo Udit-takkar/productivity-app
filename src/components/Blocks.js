@@ -33,6 +33,7 @@ export default function Blocks() {
           });
           e.removed.forEach((el) => {
             el.classList.remove("selected");
+            el.style.background = "#eeeeee";
           });
         }}
       ></Selecto>
