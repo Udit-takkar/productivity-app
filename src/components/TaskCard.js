@@ -25,6 +25,7 @@ export default function TaskCard() {
             onClick={() => {
               // console.log(task.id);
               dispatch(allActions.DeleteTask({ id: task.id }));
+              
             }}
             className="delete-button"
           >

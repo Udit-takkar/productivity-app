@@ -9,17 +9,17 @@ import TaskCard from "./components/TaskCard";
 function App() {
   return (
     <div className="App">
-      <Grid container style={{ marginTop: "1rem" }} spacing={2}>
+      <Grid container style={{ marginTop: "1rem" }} spacing={0}>
         <Grid
           md={6}
           sm={6}
-          xs={12}
+          xs={10}
           item
           alignItems="center"
           justify="center"
           style={{
             minHeight: "100vh",
-            paddingLeft: "5%",
+            paddingLeft: "20px",
           }}
         >
           <Blocks />
@@ -27,16 +27,19 @@ function App() {
         <Grid
           xs={12}
           sm={4}
-          md={4}
+          md={6}
           item
           container
-          direction="column"
-          spacing={3}
+          direction="row"
+          spacing={2}
+          style={{
+            width: "fit-content",
+          }}
         >
-          <Grid item>
+          <Grid item xs={10} style={{ height: "fit-content" }}>
             <InputTasks />
           </Grid>
-          <Grid item>
+          <Grid xs={7} style={{ height: "100%" }} item>
             <TaskCard />
           </Grid>
         </Grid>

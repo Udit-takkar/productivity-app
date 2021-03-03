@@ -19,18 +19,7 @@ export default function InputTasks() {
     id: "",
   });
 
-  useEffect(() => {
-    const source = axios.CancelToken.source();
-    const selectColors = axios
-      .get("../colors.json") //  Correct this API call
-      .then((resp) => {
-        console.log(resp.data);
-      })
-      .catch((err) => console.log(err));
-    return () => {
-      source.cancel();
-    };
-  }, []);
+  const colorsList = require("../colors.json");
 
   const handleChange = (e) => {
     setTasks({ ...Tasks, [e.target.name]: e.target.value });
@@ -67,7 +56,7 @@ export default function InputTasks() {
     root: {
       "& > *": {
         margin: theme.spacing(1),
-        width: "25ch",
+        width: "35ch",
       },
     },
     margin: {
@@ -77,7 +66,7 @@ export default function InputTasks() {
 
   const classes = useStyles();
   return (
-    <Grid container>
+    <Grid container xs={8} direction="row" style={{ width: "fit-content" }}>
       <Grid item>
         <form className={classes.root} noValidate autoComplete="off">
           <TextField
@@ -89,7 +78,7 @@ export default function InputTasks() {
           />
         </form>
       </Grid>
-      <Grid item>
+      <Grid item xs={8}>
         <FormControl className={classes.margin}>
           <InputLabel htmlFor="demo-customized-select-native">Color</InputLabel>
           <NativeSelect
@@ -99,15 +88,15 @@ export default function InputTasks() {
             value={Tasks.color}
           >
             <option aria-label="gray" value="gray" />
-            <option value="Blue">Blue</option>
-            <option value="Red">Red</option>
-            <option value="Green">Green</option>
+            {colorsList.map((color) => {
+              return <option value={"#" + color.hexCode}>{color.name}</option>;
+            })}
           </NativeSelect>
         </FormControl>
       </Grid>
-      <Grid item>
+      <Grid item style={{ width: "fit-content" }}>
         <Button
-          style={{ marginTop: "20%" }}
+          style={{ marginTop: "10px" }}
           variant="contained"
           color="primary"
           onClick={handleSubmit}
