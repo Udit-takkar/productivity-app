@@ -1,4 +1,4 @@
-html,
+axioshtml,
 body {
   position: relative;
   margin: 0;
@@ -6,6 +6,7 @@ body {
   height: 100%;
   color: #333;
   background: #fdfdfd;
+  overflow-y: hidden;
 }
 .blocks {
   display: flex;
@@ -29,6 +30,7 @@ body {
 
 .selecto-area {
   padding: 10px;
+  background-color: white;
 }
 
 #selecto1 .cube {
