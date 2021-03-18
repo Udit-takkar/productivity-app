@@ -1,158 +1,115 @@
+import { render } from "@testing-library/react";
 import React from "react";
-import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import Welcome from "../assets/images/Group_11.svg";
-import GoogleLogo from "../assets/images/google.svg";
-import Divider from "@material-ui/core/Divider";
-import { Link } from "react-router-dom";
+import Selecto from "react-selecto";
+import "./Blocks.css";
+import { useSelector, useDispatch } from "react-redux";
+import { useRef, useEffect, useCallback, useState } from "react";
 
-export default function Login() {
-  const useStyles = makeStyles((theme) => ({
-    container: {
-      padding: theme.spacing(3),
-    },
-    button: {
-      background: "#8264B4 0% 0% no-repeat padding-box",
-      backgroundColor: "#8264B4",
-      border: "1px solid #70707059",
-      borderRadius: "10px",
-      opacity: 1,
-      color: "white",
-      font: "normal normal 600 20px/24px Montserrat",
-      letterSpacing: "0px",
-      fontSize: "0.9em",
-    },
-    welcome: {
-      marginBottom: "1em",
-      textAlign: "center",
-      color: "white",
-      fontFamily: "Montserrat",
-    },
-  }));
-  const classes = useStyles();
+export default function Blocks() {
+  const cubes = [];
+  const Elems = useRef([]);
+  const time = [];
+
+  for (let i = 0; i < 144; ++i) {
+    cubes.push(i);
+  }
+
+  var input = {
+    hours: 12,
+    minutes: 30,
+  };
+
+  var timestamp = new Date(input.hours, input.minutes);
+
+  for (let i = 0; i < 144; ++i) {
+    let time1 = new Date(timestamp.getTime());
+    let time2 = new Date(timestamp.getTime() + 10 * 60000);
+
+    let tooltipTime =
+      i < 72
+        ? time1.getHours() +
+          ":" +
+          time1.getMinutes() +
+          "am" +
+          "-" +
+          time2.getHours() +
+          ":" +
+          time2.getMinutes() +
+          "am"
+        : time1.getHours() +
+          ":" +
+          time1.getMinutes() +
+          "pm" +
+          "-" +
+          time2.getHours() +
+          ":" +
+          time2.getMinutes() +
+          "pm";
+    timestamp = new Date(timestamp.getTime() + 10 * 60000);
+    time.push(tooltipTime);
+  }
+
+  const color = useSelector((state) => {
+    console.log(state.addTask);
+    if (state.addTask.tasks.length - 1 >= 0)
+      return state.addTask.tasks[state.addTask.tasks.length - 1].color;
+  });
+
+  const refElems = useCallback((element) => {
+    Elems.current.push(element);
+  }, []);
+
+  const taskId = useSelector((state) => {
+    // console.log(state.addTask.tasks[state.addTask.tasks.length - 1].id);
+    if (state.addTask.tasks.length - 1 >= 0)
+      return state.addTask.tasks[state.addTask.tasks.length - 1].id;
+  });
+
+  const deleteId = useSelector((state) => {
+    return state.addTask.tasks.deleteId;
+  });
+
+  useEffect(() => {
+    Elems.current.map((e) => {
+      if (e.classList.contains(deleteId)) {
+        e.classList.remove(deleteId);
+        e.classList.remove("selected");
+        e.style.background = "#eeeeee";
+      }
+    });
+  }, [deleteId]);
 
   return (
-    <Grid
-      container
-      spacing={2}
-      direction="row"
-      alignContent="center"
-      justify="center"
-      style={{
-        minHeight: "100vh",
-        boxSizing: "border-box",
-        backgroundColor: "#F2EFF7",
-      }}
-    >
-      <Grid
-        item
-        container
-        xs={3}
-        style={{
-          justifyContent: "center",
-          backgroundColor: "#404040",
-          alignContent: "center",
-          borderRadius: " 20px 0px 0px 20px",
+    <div className="blocks">
+      <Selecto
+        dragContainer={".elements"}
+        selectableTargets={[".selecto-area .cube"]}
+        hitRate={100}
+        selectByClick={true}
+        selectFromInside={true}
+        continueSelect={true}
+        ratio={0}
+        onSelect={(e) => {
+          e.added.forEach((el) => {
+            el.classList.add("selected");
+            el.style.background = color;
+            console.log(taskId);
+            el.classList.add(taskId);
+            // updateMap(taskId,[...Hashmap,el.key])
+            // el.id=taskId;
+          });
+          e.removed.forEach((el) => {
+            el.classList.remove("selected");
+            el.style.background = "#eeeeee";
+          });
         }}
-      >
-        <Grid container xs={6} style={{ justify: "center" }}>
-          <Grid item className={classes.welcome}>
-            <Typography variant="h6">Welcome Back!</Typography>
-          </Grid>
-          <Grid item className={classes.welcome}>
-            <Typography variant="body2">
-              Login to access the handpicked challenges and see where you stand
-              among your peers.
-            </Typography>
-          </Grid>
-        </Grid>
-        <img
-          style={{ justifyContent: "center" }}
-          src={Welcome}
-          alt="welcome"
-        ></img>
-      </Grid>
-
-      <Card style={{ borderRadius: "0px 20px 20px 0px" }}>
-        <Grid
-          item
-          container
-          xs={12}
-          style={{ justifyItems: "center", justifyContent: "center" }}
-        >
-          <Grid item className={classes.container}>
-            <form>
-              <Grid container spacing={0}>
-                <Grid item xs={12}>
-                  <Grid container spacing={2} direction="column">
-                    <Grid item xs={12}>
-                      <Typography>Email or Phone number</Typography>
-                      <TextField
-                        fullWidth
-                        name="email"
-                        size="small"
-                        variant="outlined"
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      Password
-                      <TextField
-                        fullWidth
-                        size="small"
-                        name="password"
-                        variant="outlined"
-                        type="password"
-                      />
-                    </Grid>
-                    <Grid item xs={6}>
-                      <Button style={{ color: " #8264B4" }} size="small">
-                        <Typography variant="body2">
-                          Forgot Password?
-                        </Typography>
-                      </Button>
-                    </Grid>
-                  </Grid>
-                </Grid>
-
-                <Grid item xs={12}>
-                  <Button
-                    className={classes.button}
-                    fullWidth
-                    type="submit"
-                    variant="contained"
-                  >
-                    Log in
-                  </Button>
-                </Grid>
-              </Grid>
-            </form>
-          </Grid>
-          <Grid item lg={3} xs={12} style={{ alignSelf: "center" }}>
-            <Grid item xs={12}>
-              <Typography style={{ marginBottom: "25%" }} variant="h6">
-                Sign in using :
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <img src={GoogleLogo} alt="google"></img>
-            </Grid>
-            <Grid item xs={12}>
-              <Typography style={{ marginTop: "25%" }}>
-                <Link style={{ color: "#8264B4", fontSize: "0.9em" }}>
-                  New to Devsnest? Create an account
-                </Link>
-              </Typography>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Card>
-    </Grid>
+      ></Selecto>
+      <div className="elements selecto-area" id="selecto1">
+        <ReactTooltip textColor="black" backgroundColor="white" />
+        {cubes.map((i) => (
+          <div className="cube" data-tip={time[i]} ref={refElems} key={i}></div>
+        ))}
+      </div>
+    </div>
   );
 }

@@ -1,0 +1,53 @@
+.last_saved_tasks {
+  z-index: 100;
+  position: absolute;
+  left: 25%;
+  top: 15%;
+  width: 500px;
+  height: 400px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  /* text-align: justify; */
+  text-align: center;
+  background: #fff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 0px 20px #00000045;
+  border-radius: 20px;
+  scrollbar-width: thin;
+}
+
+.close_btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 0.5rem;
+  cursor: pointer;
+}
+
+.task_box_heading {
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+.task_box_heading > h1 {
+  color: #29b9b6;
+}
+
+.task_box_tasks {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 0px 10px #00000045;
+  border-radius: 12px;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-top: 1rem;
+  padding: 10px;
+  color: black;
+  font-weight: 200;
+}
+
+.btns {
+  margin-top: 1.5rem;
+}
+
+.btns > Button {
+  margin-left: 1.5rem;
+}

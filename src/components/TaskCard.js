@@ -3,9 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import "./Taskcard.css";
 import DeleteIcon from "@material-ui/icons/Delete";
 import allActions from "../actions/index";
+import { useEffect } from "react";
 
 export default function TaskCard() {
   const tasks = useSelector((state) => {
+    console.log(state);
     return state.addTask.tasks;
   });
 
@@ -25,7 +27,6 @@ export default function TaskCard() {
             onClick={() => {
               // console.log(task.id);
               dispatch(allActions.DeleteTask({ id: task.id }));
-              
             }}
             className="delete-button"
           >
@@ -35,5 +36,6 @@ export default function TaskCard() {
       </div>
     );
   });
+
   return <div>{taskList}</div>;
 }

@@ -9,7 +9,7 @@ import Button from "@material-ui/core/Button";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-import axios from "axios";
+// import axios from "axios";
 import allActions from "../actions/index";
 
 export default function InputTasks() {
@@ -73,14 +73,16 @@ export default function InputTasks() {
             name="task"
             id="standard-basic"
             onChange={handleChange}
-            label="Standard"
+            label="Enter Task"
             value={Tasks.task}
           />
         </form>
       </Grid>
-      <Grid item xs={8}>
+      <Grid item xs={12} md={8}>
         <FormControl className={classes.margin}>
-          <InputLabel htmlFor="demo-customized-select-native">Color</InputLabel>
+          <InputLabel htmlFor="demo-customized-select-native">
+            Select color
+          </InputLabel>
           <NativeSelect
             id="demo-customized-select-native"
             name="color"

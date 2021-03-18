@@ -1,0 +1,48 @@
+* {
+  box-sizing: border-box;
+  margin: auto;
+}
+body {
+  background-color: rgba(232, 239, 255, 0.674);
+}
+
+.main_wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  /* border: 1px solid black; */
+  position: absolute;
+  top: 20%;
+  left: 17%;
+  padding: 2.5rem;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 0px 20px #00000045;
+  border-radius: 20px;
+}
+.time {
+  height: 300px;
+  width: auto;
+}
+.mid_wrapper {
+  display: flex;
+}
+
+.left_wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.left_wrapper > h1 {
+  margin-bottom: 1rem;
+  position: relative;
+  left: 1rem;
+  font-size: 50px;
+}
+
+.left_wrapper > p {
+  font-size: medium;
+}
+
+.googleButton {
+  margin-top: 1.25rem;
+}

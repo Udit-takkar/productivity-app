@@ -1,10 +1,9 @@
 import React from "react";
 
-const intialState = { tasks: [],deleteId:{} };
+const intialState = { tasks: [], deleteId: {} };
 export default function TaskReducer(state = intialState, action) {
   switch (action.type) {
     case "ADD_TASK": {
-      console.log(state);
       return {
         tasks: [
           ...state.tasks,
@@ -14,7 +13,7 @@ export default function TaskReducer(state = intialState, action) {
             color: action.payload.color,
           },
         ],
-        deleteId:{}
+        deleteId: {},
       };
     }
 
@@ -23,7 +22,7 @@ export default function TaskReducer(state = intialState, action) {
         return task.id !== action.payload.id;
       });
       // console.log(newTasks);
-     newTasks.deleteId=action.payload.id;
+      newTasks.deleteId = action.payload.id;
       return { tasks: newTasks };
     }
 
