@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import "./Taskcard.css";
+import "../css/Taskcard.css";
 import DeleteIcon from "@material-ui/icons/Delete";
 import allActions from "../actions/index";
 import { useEffect } from "react";

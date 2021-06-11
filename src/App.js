@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+import "./css/App.css";
 import Blocks from "./components/Blocks";
 import Grid from "@material-ui/core/Grid";
 import TextData from "./components/TaskCard";
@@ -50,9 +50,7 @@ function App() {
                   xs={7}
                   style={{
                     height: "500px",
-
                     overflowY: "auto",
-
                     border: "0.5px solid grey",
                     borderRadius: "15px",
                   }}
@@ -65,7 +63,18 @@ function App() {
           </PrivateRoute>
 
           <Route exact path="/">
-            <SignIn />
+            <Grid
+              container
+              spacing={0}
+              direction="column"
+              alignItems="center"
+              justify="center"
+              style={{ minHeight: "100vh" }}
+            >
+              <Grid item>
+                <SignIn />
+              </Grid>
+            </Grid>
           </Route>
         </Switch>
       </BrowserRouter>

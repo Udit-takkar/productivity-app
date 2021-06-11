@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import React from "react";
 import Selecto from "react-selecto";
-import "./Blocks.css";
+import "../css/Blocks.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useRef, useEffect, useCallback, useState } from "react";
 import ReactTooltip from "react-tooltip";

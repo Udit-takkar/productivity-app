@@ -6,7 +6,7 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import { useState } from "react";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
-import "./Header.css";
+import "../css/Header.css";
 import Button from "@material-ui/core/Button";
 
 function Header() {

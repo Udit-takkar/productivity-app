@@ -1,8 +1,8 @@
 import React from "react";
 import { useFirebase } from "react-redux-firebase";
 import { useHistory } from "react-router-dom";
-import Img from "./time.jpg";
-import "./SignIn.css";
+import Img from "../Assets/time.jpg";
+import "../css/SignIn.css";
 import GoogleButton from "react-google-button";
 
 const SignIn = () => {
@@ -25,7 +25,7 @@ const SignIn = () => {
         <div className="left_wrapper">
           <h1>Track Your Time</h1>
           <p>
-            Let's think 24 hours as 144 10 minute blocks <br />
+            Let's think 24 hours as 144 X 10 minute blocks <br />
             and track each one of them
           </p>
           <div>
@@ -38,7 +38,7 @@ const SignIn = () => {
             />
           </div>
         </div>
-        <img src={Img} className="time" />
+        <img src={Img} alt="illustration" className="time" />
       </div>
     </div>
   );
