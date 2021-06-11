@@ -7,50 +7,11 @@ import { useRef, useEffect, useCallback, useState } from "react";
 import ReactTooltip from "react-tooltip";
 import Header from "./Header";
 import "firebase/firestore";
+import cubes from "../utils/cubes";
+import time from "../utils/time";
 
 export default function Blocks() {
-  const cubes = [];
   const Elems = useRef([]);
-  const time = [];
-
-  for (let i = 0; i < 144; ++i) {
-    cubes.push(i);
-  }
-
-  var input = {
-    hours: 12,
-    minutes: 30,
-  };
-
-  var timestamp = new Date(input.hours, input.minutes);
-
-  for (let i = 0; i < 144; ++i) {
-    let time1 = new Date(timestamp.getTime());
-    let time2 = new Date(timestamp.getTime() + 10 * 60000);
-
-    let tooltipTime =
-      i < 72
-        ? time1.getHours() +
-          ":" +
-          time1.getMinutes() +
-          "am" +
-          "-" +
-          time2.getHours() +
-          ":" +
-          time2.getMinutes() +
-          "am"
-        : time1.getHours() +
-          ":" +
-          time1.getMinutes() +
-          "pm" +
-          "-" +
-          time2.getHours() +
-          ":" +
-          time2.getMinutes() +
-          "pm";
-    timestamp = new Date(timestamp.getTime() + 10 * 60000);
-    time.push(tooltipTime);
-  }
 
   const color = useSelector((state) => {
     if (state.addTask.tasks.length - 1 >= 0)
@@ -71,6 +32,10 @@ export default function Blocks() {
     return state.addTask.tasks.deleteId;
   });
 
+  const tasks = useSelector((state) => {
+    return state.addTask.tasks;
+  });
+
   useEffect(() => {
     Elems.current.map((e) => {
       if (e.classList.contains(deleteId)) {
@@ -80,10 +45,6 @@ export default function Blocks() {
       }
     });
   }, [deleteId]);
-
-  const tasks = useSelector((state) => {
-    return state.addTask.tasks;
-  });
 
   return (
     <>
