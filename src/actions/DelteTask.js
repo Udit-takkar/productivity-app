@@ -1,10 +1,9 @@
 import React from "react";
 
-const DeleteTask = ({ id }) => {
-  // console.log(id);
+const DeleteTask = ({ id, color }) => {
   return {
     type: "DELETE_TASK",
-    payload: { id: id },
+    payload: { id: id, color: color },
   };
 };
 

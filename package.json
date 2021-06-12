@@ -26,6 +26,7 @@
     "react-tooltip": "^4.2.21",
     "react-uuid": "^1.0.2",
     "redux": "^4.1.0",
+    "redux-async-initial-state": "^0.3.0",
     "redux-firestore": "^0.15.0",
     "uuid": "^8.3.2",
     "web-vitals": "^2.0.1"

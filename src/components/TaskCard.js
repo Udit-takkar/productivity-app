@@ -4,12 +4,41 @@ import "../css/Taskcard.css";
 import DeleteIcon from "@material-ui/icons/Delete";
 import allActions from "../actions/index";
 import { useEffect } from "react";
+import { useFirebase } from "react-redux-firebase";
 
 export default function TaskCard() {
+  const firebase = useFirebase();
+  const db = firebase.firestore();
+  var currentSignedInUser = firebase.auth().currentUser;
+  var docRef = db.collection("users").doc(currentSignedInUser.uid);
+
   const tasks = useSelector((state) => {
-    console.log(state);
     return state.addTask.tasks;
   });
+
+  useEffect(() => {
+    const getData = () => {
+      docRef
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            if (doc.data) {
+              // setbgColor(doc.data().bgColorState);
+              const tasks = doc.data().tasks;
+              console.log(tasks);
+              dispatch(allActions.InitializeState(tasks));
+            }
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+          }
+        })
+        .catch((error) => {
+          console.log("Error getting document:", error);
+        });
+    };
+    getData();
+  }, []);
 
   const dispatch = useDispatch();
 
@@ -26,7 +55,9 @@ export default function TaskCard() {
           <button
             onClick={() => {
               // console.log(task.id);
-              dispatch(allActions.DeleteTask({ id: task.id }));
+              dispatch(
+                allActions.DeleteTask({ id: task.id, color: task.color })
+              );
             }}
             className="delete-button"
           >

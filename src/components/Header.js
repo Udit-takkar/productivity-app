@@ -8,6 +8,7 @@ import { useState } from "react";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import "../css/Header.css";
 import Button from "@material-ui/core/Button";
+import bgColorState from "../utils/bgColorState";
 
 function Header() {
   const firebase = useFirebase();
@@ -69,6 +70,7 @@ function Header() {
   const SaveData = () => {
     db.collection("users").doc(currentSignedInUser.uid).set({
       tasks: tasks,
+      bgColorState: bgColorState,
     });
   };
   return (

@@ -9,18 +9,59 @@ import Header from "./Header";
 import "firebase/firestore";
 import cubes from "../utils/cubes";
 import time from "../utils/time";
+import "firebase/firestore";
+import { useFirebase } from "react-redux-firebase";
+import bgColorState from "../utils/bgColorState";
 
 export default function Blocks() {
   const Elems = useRef([]);
+  const firebase = useFirebase();
+  const db = firebase.firestore();
+  var currentSignedInUser = firebase.auth().currentUser;
+  var docRef = db.collection("users").doc(currentSignedInUser.uid);
 
-  const color = useSelector((state) => {
-    if (state.addTask.tasks.length - 1 >= 0)
-      return state.addTask.tasks[state.addTask.tasks.length - 1].color;
+  // const [savedbgColorState, setbgColor] = useState([]);
+
+  useEffect(() => {
+    const getData = () => {
+      docRef
+        .get()
+        .then((doc) => {
+          console.log(doc);
+          if (doc.exists) {
+            if (doc.data) {
+              // setbgColor(doc.data().bgColorState);
+              doc.data().bgColorState.forEach((color, index) => {
+                bgColorState[index] = color;
+              });
+              console.log(bgColorState);
+            }
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+          }
+        })
+        .catch((error) => {
+          console.log("Error getting document:", error);
+        });
+    };
+    getData();
+  }, []);
+
+  // const color = useSelector((state) => {
+  //   if (state.addTask.tasks.length - 1 >= 0)
+  //     return state.addTask.tasks[state.addTask.tasks.length - 1].color;
+  // });
+  const SelectedColor = useSelector((state) => {
+    return state.SelectedColor.color;
   });
-
   const refElems = useCallback((element) => {
     Elems.current.push(element);
   }, []);
+
+  // const bgColorState=useSelector((state) => {
+  //   return state.firestore.data.bgColorState
+  // })
 
   const taskId = useSelector((state) => {
     // console.log(state.addTask.tasks[state.addTask.tasks.length - 1].id);
@@ -29,7 +70,7 @@ export default function Blocks() {
   });
 
   const deleteId = useSelector((state) => {
-    return state.addTask.tasks.deleteId;
+    return state.addTask.deleteTask.id;
   });
 
   const tasks = useSelector((state) => {
@@ -38,7 +79,7 @@ export default function Blocks() {
 
   useEffect(() => {
     Elems.current.map((e) => {
-      if (e.classList.contains(deleteId)) {
+      if (e && deleteId && e.classList.contains(deleteId)) {
         e.classList.remove(deleteId);
         e.classList.remove("selected");
         e.style.background = "#eeeeee";
@@ -62,12 +103,16 @@ export default function Blocks() {
           continueSelect={true}
           ratio={0}
           onSelect={(e) => {
+            // console.log(e);
             e.added.forEach((el) => {
               if (el.style.background == "rgb(238, 238, 238)") {
                 el.classList.add("selected");
                 el.classList.add(taskId);
-                el.style.background = color;
-                console.log(el);
+                el.style.background = SelectedColor;
+                const index = parseInt(el.getAttribute("index"), 10);
+                bgColorState[index] = SelectedColor;
+
+                // console.log(el);
               }
               // updateMap(taskId,[...Hashmap,el.key])
               // el.id=taskId;
@@ -78,6 +123,8 @@ export default function Blocks() {
                 el.classList.remove(...el.classList);
                 el.classList.add("cube");
                 el.style.background = "#eee";
+                const index = parseInt(el.getAttribute("index"), 10);
+                bgColorState[index] = "#eee";
               }
             });
           }}
@@ -90,8 +137,9 @@ export default function Blocks() {
               className="cube"
               data-tip={time[i]}
               ref={refElems}
-              style={{ background: "#eee" }}
+              style={{ background: `${bgColorState[i]}` }}
               key={i}
+              index={i}
             ></div>
           ))}
         </div>

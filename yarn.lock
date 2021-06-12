@@ -12637,6 +12637,11 @@
   "resolved" "https://registry.npmjs.org/reduce-reducers/-/reduce-reducers-1.0.4.tgz"
   "version" "1.0.4"
 
+"redux-async-initial-state@^0.3.0":
+  "integrity" "sha512-Is+i60mt0eDG64xICQFej7nueSF0ZHozPLINr7KqQk2Yp04zTmPEIY6xJmBEyaz7tmWtFoVeYqfKqt7gMSSKhA=="
+  "resolved" "https://registry.npmjs.org/redux-async-initial-state/-/redux-async-initial-state-0.3.0.tgz"
+  "version" "0.3.0"
+
 "redux-firestore@^0.15.0":
   "integrity" "sha512-t93CL6UIoycpg/zIQy7ZkZkvX0IUjlOLG9xtCrcStydoNijzv8rAMzEJmLxHh1RKzsQ8RBH4G556/zlxR1dXcA=="
   "resolved" "https://registry.npmjs.org/redux-firestore/-/redux-firestore-0.15.0.tgz"

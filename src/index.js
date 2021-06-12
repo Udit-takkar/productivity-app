@@ -13,8 +13,6 @@ import { createFirestoreInstance } from "redux-firestore";
 import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 import { BrowserRouter } from "react-router-dom";
 
-const store = createStore(reducers);
-
 const firebaseConfig = {
   apiKey: "AIzaSyChBWO6LLzBhOvPyqs2bM8OA_648rd9pC0",
   authDomain: "productivity-app-7bd77.firebaseapp.com",
@@ -25,12 +23,15 @@ const firebaseConfig = {
   appId: "1:926266889778:web:21c21a1e7b132f636d4e2b",
 };
 
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+
+const store = createStore(reducers);
+
 const rrfConfig = {
   userProfile: "users",
   useFirestoreForProfile: true,
 };
 
-const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
 firebase.firestore();
 const rrfProps = {
@@ -40,6 +41,7 @@ const rrfProps = {
   createFirestoreInstance,
   db,
 };
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

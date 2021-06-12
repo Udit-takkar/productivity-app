@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 // import axios from "axios";
 import allActions from "../actions/index";
+import bgColorState from "../utils/bgColorState";
 
 export default function InputTasks() {
   const [Tasks, setTasks] = useState({
@@ -23,6 +24,11 @@ export default function InputTasks() {
 
   const handleChange = (e) => {
     setTasks({ ...Tasks, [e.target.name]: e.target.value });
+  };
+
+  const handleChangeColor = async (e) => {
+    setTasks({ ...Tasks, color: e.target.value });
+    await dispatch(allActions.SelectedColor(e.target.value));
   };
 
   const task = useSelector((state) => {
@@ -86,7 +92,7 @@ export default function InputTasks() {
           <NativeSelect
             id="demo-customized-select-native"
             name="color"
-            onChange={handleChange}
+            onChange={handleChangeColor}
             value={Tasks.color}
           >
             <option aria-label="gray" value="gray" />
