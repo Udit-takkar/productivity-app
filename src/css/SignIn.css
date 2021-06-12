@@ -32,9 +32,10 @@ body {
 
 .left_wrapper > h1 {
   margin-bottom: 1rem;
-  position: relative;
-  left: 1rem;
+  text-align: left;
   font-size: 50px;
+  font-weight: 700;
+  font-family: "Alegreya";
 }
 
 .left_wrapper > p {
@@ -42,5 +43,6 @@ body {
 }
 
 .googleButton {
+  text-align: left;
   margin-top: 1.25rem;
 }
