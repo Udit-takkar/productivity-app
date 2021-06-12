@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFirebase } from "react-redux-firebase";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -21,19 +21,23 @@ function Header() {
     return state.addTask.tasks;
   });
 
-  firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-      console.log(currentSignedInUser.displayName);
-    } else {
-      console.log("I am signed out");
-    }
-  });
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        console.log(currentSignedInUser.displayName);
+      } else {
+        console.log("I am signed out");
+      }
+    });
+  }, []);
+
   const SignOut = () => {
     firebase
       .auth()
       .signOut()
       .then(() => {
         console.log("Sign Out");
+        localStorage.clear();
         history.push("/");
       })
       .catch((err) => console.error(err));

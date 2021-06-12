@@ -23,6 +23,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-selecto": "^1.11.1",
+    "react-spinkit": "^3.0.0",
     "react-tooltip": "^4.2.21",
     "react-uuid": "^1.0.2",
     "redux": "^4.1.0",

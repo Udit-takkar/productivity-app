@@ -4293,7 +4293,7 @@
     "isobject" "^3.0.0"
     "static-extend" "^0.1.1"
 
-"classnames@^2.3.1":
+"classnames@^2.2.3", "classnames@^2.3.1":
   "integrity" "sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA=="
   "resolved" "https://registry.npmjs.org/classnames/-/classnames-2.3.1.tgz"
   "version" "2.3.1"
@@ -9372,6 +9372,11 @@
     "emojis-list" "^2.0.0"
     "json5" "^1.0.1"
 
+"loaders.css@^0.1.2":
+  "integrity" "sha1-Op+0NybHMzSjgUKvnQYpAZtlh0M="
+  "resolved" "https://registry.npmjs.org/loaders.css/-/loaders.css-0.1.2.tgz"
+  "version" "0.1.2"
+
 "locate-path@^2.0.0":
   "integrity" "sha1-K1aLJl7slExtnA3pw9u7ygNUzY4="
   "resolved" "https://registry.npmjs.org/locate-path/-/locate-path-2.0.0.tgz"
@@ -11828,7 +11833,7 @@
     "react-is" "^16.3.2"
     "warning" "^4.0.0"
 
-"prop-types@^15.0.0", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@>=15":
+"prop-types@^15.0.0", "prop-types@^15.5.8", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@>=15":
   "integrity" "sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.7.2.tgz"
   "version" "15.7.2"
@@ -12332,6 +12337,16 @@
   "version" "1.11.1"
   dependencies:
     "selecto" "~1.11.1"
+
+"react-spinkit@^3.0.0":
+  "integrity" "sha1-Mf2vThgXd2bFfRsfMzApD4SSqFo="
+  "resolved" "https://registry.npmjs.org/react-spinkit/-/react-spinkit-3.0.0.tgz"
+  "version" "3.0.0"
+  dependencies:
+    "classnames" "^2.2.3"
+    "loaders.css" "^0.1.2"
+    "object-assign" "^4.1.0"
+    "prop-types" "^15.5.8"
 
 "react-tooltip@^4.2.21":
   "integrity" "sha512-zSLprMymBDowknr0KVDiJ05IjZn9mQhhg4PRsqln0OZtURAJ1snt1xi5daZfagsh6vfsziZrc9pErPTDY1ACig=="

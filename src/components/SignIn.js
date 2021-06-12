@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFirebase } from "react-redux-firebase";
 import { useHistory } from "react-router-dom";
 import Img from "../Assets/time.jpg";
@@ -15,7 +15,9 @@ const SignIn = () => {
         provider: "google",
         type: "popup",
       })
-      .then(() => {
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem("token", res.credential.accessToken);
         history.push("/home");
       });
   };

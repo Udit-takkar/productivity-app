@@ -20,8 +20,6 @@ export default function Blocks() {
   var currentSignedInUser = firebase.auth().currentUser;
   var docRef = db.collection("users").doc(currentSignedInUser.uid);
 
-  // const [savedbgColorState, setbgColor] = useState([]);
-
   useEffect(() => {
     const getData = () => {
       docRef
@@ -30,14 +28,12 @@ export default function Blocks() {
           console.log(doc);
           if (doc.exists) {
             if (doc.data) {
-              // setbgColor(doc.data().bgColorState);
               doc.data().bgColorState.forEach((color, index) => {
                 bgColorState[index] = color;
               });
               console.log(bgColorState);
             }
           } else {
-            // doc.data() will be undefined in this case
             console.log("No such document!");
           }
         })
@@ -48,10 +44,6 @@ export default function Blocks() {
     getData();
   }, []);
 
-  // const color = useSelector((state) => {
-  //   if (state.addTask.tasks.length - 1 >= 0)
-  //     return state.addTask.tasks[state.addTask.tasks.length - 1].color;
-  // });
   const SelectedColor = useSelector((state) => {
     return state.SelectedColor.color;
   });
@@ -59,27 +51,12 @@ export default function Blocks() {
     Elems.current.push(element);
   }, []);
 
-  // const bgColorState=useSelector((state) => {
-  //   return state.firestore.data.bgColorState
-  // })
-
-  const taskId = useSelector((state) => {
-    // console.log(state.addTask.tasks[state.addTask.tasks.length - 1].id);
-    if (state.addTask.tasks.length - 1 >= 0)
-      return state.addTask.tasks[state.addTask.tasks.length - 1].id;
-  });
-
   const deleteId = useSelector((state) => {
     return state.addTask.deleteTask.id;
   });
 
   const deleteTaskColor = useSelector((state) => {
     return state.addTask.deleteTask.color;
-  });
-  console.log(deleteTaskColor, typeof deleteTaskColor);
-
-  const tasks = useSelector((state) => {
-    return state.addTask.tasks;
   });
 
   useEffect(() => {
@@ -90,12 +67,10 @@ export default function Blocks() {
         console.log(index);
       }
     });
-    console.log(indexes);
+
     Elems.current.forEach((e) => {
       const index = parseInt(e.getAttribute("index"), 10);
       if (e && deleteId) {
-        // e.classList.remove(deleteId);
-        // e.classList.remove("selected");
         if (indexes.includes(index)) {
           e.style.background = "#eeeeee";
           bgColorState[index] = "#eee";
@@ -123,22 +98,14 @@ export default function Blocks() {
             // console.log(e);
             e.added.forEach((el) => {
               if (el.style.background == "rgb(238, 238, 238)") {
-                // el.classList.add("selected");
-                // el.classList.add(taskId);
                 el.style.background = SelectedColor;
                 const index = parseInt(el.getAttribute("index"), 10);
                 bgColorState[index] = SelectedColor;
-
-                // console.log(el);
               }
-              // updateMap(taskId,[...Hashmap,el.key])
-              // el.id=taskId;
             });
 
             e.removed.forEach((el) => {
-              if (el.classList.contains(taskId)) {
-                el.classList.remove(...el.classList);
-                el.classList.add("cube");
+              if (el.style.background === SelectedColor) {
                 el.style.background = "#eee";
                 const index = parseInt(el.getAttribute("index"), 10);
                 bgColorState[index] = "#eee";

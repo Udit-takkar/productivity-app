@@ -9,9 +9,8 @@ import Button from "@material-ui/core/Button";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-// import axios from "axios";
 import allActions from "../actions/index";
-import bgColorState from "../utils/bgColorState";
+const colorsList = require("../colors.json");
 
 export default function InputTasks() {
   const [Tasks, setTasks] = useState({
@@ -20,24 +19,15 @@ export default function InputTasks() {
     id: "",
   });
 
-  const colorsList = require("../colors.json");
-
   const handleChange = (e) => {
     setTasks({ ...Tasks, [e.target.name]: e.target.value });
   };
-
+  const [colors, setColors] = useState(colorsList);
   const handleChangeColor = async (e) => {
     setTasks({ ...Tasks, color: e.target.value });
     await dispatch(allActions.SelectedColor(e.target.value));
   };
 
-  const task = useSelector((state) => {
-    // console.log(state);
-    return state.addTask.tasks;
-  });
-
-  // console.log(task);
-  // console.log(Tasks);
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     if (Tasks.color === "") {
@@ -45,6 +35,12 @@ export default function InputTasks() {
     } else if (Tasks.task.length === 0) {
       alert("Please Enter Task!");
     } else {
+      let color = Tasks.color;
+      color = color.substring(1);
+      const FilteredColors = colors.filter((c) => {
+        console.log(color, c.hexCode);
+        return c.hexCode !== color;
+      });
       dispatch(
         allActions.AddTask({
           task: Tasks.task,
@@ -52,29 +48,29 @@ export default function InputTasks() {
           id: uuidv4(),
         })
       );
+      setColors(FilteredColors);
       setTasks({ task: "", color: "", id: "" });
     }
   };
 
-  // console.log(task);
-
   const useStyles = makeStyles((theme) => ({
     root: {
       "& > *": {
-        margin: theme.spacing(1),
-        width: "35ch",
+        marginTop: theme.spacing(3),
       },
     },
-    margin: {
-      margin: theme.spacing(1),
+
+    btn: {
+      marginTop: theme.spacing(1),
+      width: "100%",
     },
   }));
 
   const classes = useStyles();
   return (
-    <Grid container xs={8} direction="row" style={{ width: "fit-content" }}>
-      <Grid item>
-        <form className={classes.root} noValidate autoComplete="off">
+    <Grid container className={classes.root} xs={8} direction="row">
+      <Grid item xs={12} md={8}>
+        <form noValidate autoComplete="off">
           <TextField
             name="task"
             id="standard-basic"
@@ -84,8 +80,8 @@ export default function InputTasks() {
           />
         </form>
       </Grid>
-      <Grid item xs={12} md={8}>
-        <FormControl className={classes.margin}>
+      <Grid item xs={4}>
+        <FormControl>
           <InputLabel htmlFor="demo-customized-select-native">
             Select color
           </InputLabel>
@@ -96,15 +92,15 @@ export default function InputTasks() {
             value={Tasks.color}
           >
             <option aria-label="gray" value="gray" />
-            {colorsList.map((color) => {
+            {colors.map((color) => {
               return <option value={"#" + color.hexCode}>{color.name}</option>;
             })}
           </NativeSelect>
         </FormControl>
       </Grid>
-      <Grid item style={{ width: "fit-content" }}>
+      <Grid xs={12} item>
         <Button
-          style={{ marginTop: "10px" }}
+          className={classes.btn}
           variant="contained"
           color="primary"
           onClick={handleSubmit}

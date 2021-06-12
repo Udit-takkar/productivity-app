@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./css/App.css";
 import Blocks from "./components/Blocks";
 import Grid from "@material-ui/core/Grid";
@@ -8,8 +8,54 @@ import TaskCard from "./components/TaskCard";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import SignIn from "./components/SignIn";
 import PrivateRoute from "./components/PrivateRoute";
+import { useFirebase } from "react-redux-firebase";
+import Spinner from "react-spinkit";
+import { useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 function App() {
+  const firebase = useFirebase();
+  const [loading, setLoading] = useState(true);
+  const history = useHistory();
+  useEffect(() => {
+    const accessToken = localStorage.getItem("token")
+      ? localStorage.getItem("token")
+      : null;
+
+    if (accessToken) {
+      firebase
+        .login({
+          credential: firebase.auth.GoogleAuthProvider.credential(
+            null,
+            accessToken
+          ),
+        })
+        .then((response) => {
+          console.log(response);
+          history.push("/home");
+          setLoading(false);
+        });
+    } else {
+      setLoading(false);
+    }
+  }, []);
+  if (loading) {
+    return (
+      <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{ minHeight: "100vh" }}
+      >
+        <Grid item xs={3}>
+          <Spinner name="ball-spin-fade-loader" color="purple" fadeIn="none" />
+        </Grid>
+      </Grid>
+    );
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
