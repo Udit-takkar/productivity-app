@@ -73,19 +73,36 @@ export default function Blocks() {
     return state.addTask.deleteTask.id;
   });
 
+  const deleteTaskColor = useSelector((state) => {
+    return state.addTask.deleteTask.color;
+  });
+  console.log(deleteTaskColor, typeof deleteTaskColor);
+
   const tasks = useSelector((state) => {
     return state.addTask.tasks;
   });
 
   useEffect(() => {
-    Elems.current.map((e) => {
-      if (e && deleteId && e.classList.contains(deleteId)) {
-        e.classList.remove(deleteId);
-        e.classList.remove("selected");
-        e.style.background = "#eeeeee";
+    const indexes = [];
+    bgColorState.forEach((color, index) => {
+      if (color === deleteTaskColor) {
+        indexes.push(index);
+        console.log(index);
       }
     });
-  }, [deleteId]);
+    console.log(indexes);
+    Elems.current.forEach((e) => {
+      const index = parseInt(e.getAttribute("index"), 10);
+      if (e && deleteId) {
+        // e.classList.remove(deleteId);
+        // e.classList.remove("selected");
+        if (indexes.includes(index)) {
+          e.style.background = "#eeeeee";
+          bgColorState[index] = "#eee";
+        }
+      }
+    });
+  }, [deleteTaskColor]);
 
   return (
     <>
@@ -106,8 +123,8 @@ export default function Blocks() {
             // console.log(e);
             e.added.forEach((el) => {
               if (el.style.background == "rgb(238, 238, 238)") {
-                el.classList.add("selected");
-                el.classList.add(taskId);
+                // el.classList.add("selected");
+                // el.classList.add(taskId);
                 el.style.background = SelectedColor;
                 const index = parseInt(el.getAttribute("index"), 10);
                 bgColorState[index] = SelectedColor;
