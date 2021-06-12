@@ -46,8 +46,9 @@
 
 .btns {
   margin-top: 1.5rem;
+  margin-left: 3rem;
 }
 
-.btns > Button {
+#btn {
   margin-left: 1.5rem;
 }

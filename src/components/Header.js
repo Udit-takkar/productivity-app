@@ -17,34 +17,6 @@ function Header() {
 
   var currentSignedInUser = firebase.auth().currentUser;
 
-  const [ShowLastSavedTasks, setShowLastSavedTasks] = useState(false);
-  const [LastSavedTasks, setLastSavedTasks] = useState([]);
-
-  var docRef = db.collection("users").doc(currentSignedInUser.uid);
-  const getData = () => {
-    docRef
-      .get()
-      .then((doc) => {
-        if (doc.exists) {
-          console.log("Document data:", [...doc.data().tasks]);
-          setShowLastSavedTasks(() => {
-            return !ShowLastSavedTasks;
-          });
-          setLastSavedTasks(() => {
-            return doc.data().tasks.map(({ task }) => {
-              return task;
-            });
-          });
-        } else {
-          // doc.data() will be undefined in this case
-
-          console.log("No such document!");
-        }
-      })
-      .catch((error) => {
-        console.log("Error getting document:", error);
-      });
-  };
   const tasks = useSelector((state) => {
     return state.addTask.tasks;
   });
@@ -75,36 +47,26 @@ function Header() {
   };
   return (
     <div>
-      <div style={{ display: "flex" }}>
-        <div className="btns">
-          <Button onClick={SignOut} variant="contained" color="secondary">
-            Sign Out
-          </Button>
-          <Button onClick={getData} variant="outlined">
-            View Last Saved Tasks
-          </Button>
-          <Button onClick={SaveData} variant="outlined">
-            Save tasks
-          </Button>
-        </div>
-        {ShowLastSavedTasks && (
-          <div className="last_saved_tasks">
-            <div className="task_box_heading">
-              <h1>{currentSignedInUser.displayName}'s Yesterday </h1>
-            </div>
-            {LastSavedTasks.map((task) => {
-              return (
-                <div className="task_box">
-                  <div className="task_box_tasks">{task}</div>
-                  <HighlightOffIcon
-                    className="close_btn"
-                    onClick={() => setShowLastSavedTasks(!ShowLastSavedTasks)}
-                  />
-                </div>
-              );
-            })}
-          </div>
-        )}
+      <div className="btns" style={{ display: "flex" }}>
+        <Button
+          id="btn"
+          onClick={SignOut}
+          variant="contained"
+          color="secondary"
+        >
+          Sign Out
+        </Button>
+
+        <Button
+          id="btn"
+          href={"https://github.com/Udit-takkar/productivity-app"}
+          variant="outlined"
+        >
+          View on Github
+        </Button>
+        <Button id="btn" onClick={SaveData} variant="outlined">
+          Save tasks
+        </Button>
       </div>
     </div>
   );

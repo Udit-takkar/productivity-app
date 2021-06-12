@@ -24,8 +24,7 @@ function App() {
                 alignItems="center"
                 justify="center"
                 style={{
-                  minHeight: "100vh",
-                  paddingLeft: "20px",
+                  minHeight: "100%",
                 }}
               >
                 <Blocks />

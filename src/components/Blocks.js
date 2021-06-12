@@ -106,7 +106,7 @@ export default function Blocks() {
 
   return (
     <>
-      <div style={{ display: "inline" }}>
+      <div style={{ display: "block", marginLeft: "30px" }}>
         <Header />
       </div>
 
